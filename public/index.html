@@ -3,25 +3,139 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DevTask - Backend Proyekti</title>
+    <title>DevTask - Müasir Tapşırıq Meneceri</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 50px; background-color: #f4f4f4; }
-        .container { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 400px; }
-        input, button { width: 100%; padding: 10px; margin: 10px 0; border-radius: 5px; border: 1px solid #ccc; box-sizing: border-box; }
-        button { background-color: #28a745; color: white; border: none; cursor: pointer; }
-        button:hover { background-color: #218838; }
+        /* Modern şrift və fon */
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            margin: 0; 
+            padding: 0;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Əsas Container kartı */
+        .container { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08); 
+            width: 100%;
+            max-width: 420px; 
+            box-sizing: border-box;
+        }
+
+        h2 {
+            color: #2d3748;
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        /* İnput sahəsi */
+        input[type="text"] { 
+            width: 100%; 
+            padding: 12px 16px; 
+            margin-bottom: 12px; 
+            border-radius: 8px; 
+            border: 2px solid #e2e8f0; 
+            box-sizing: border-box; 
+            font-size: 16px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4c51bf;
+            box-shadow: 0 0 0 3px rgba(76, 81, 191, 0.15);
+        }
+
+        /* Əlavə Et Düyməsi */
+        button[type="submit"] { 
+            width: 100%; 
+            padding: 12px; 
+            background-color: #4c51bf; 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer; 
+            transition: background-color 0.2s ease, transform 0.1s ease;
+        }
+
+        button[type="submit"]:hover { 
+            background-color: #434190; 
+        }
+
+        button[type="submit"]:active {
+            transform: scale(0.98);
+        }
+
+        /* Tapşırıq Siyahısı (UL və LI) */
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 24px 0 0 0;
+            border-top: 2px solid #edf2f7;
+        }
+
+        li {
+            background-color: #f7fafc;
+            padding: 12px 16px;
+            margin-top: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #4c51bf;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 15px;
+            color: #4a5568;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            animation: fadeIn 0.3s ease;
+        }
+
+        /* Silmə (X) Düyməsi */
+        li button {
+            background: #fff5f5;
+            color: #e53e3e !important;
+            border: 1px solid #fed7d7;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-left: 0 !important; /* script.js-dəki köhnə stili əzirik */
+            transition: all 0.2s ease;
+        }
+
+        li button:hover {
+            background: #e53e3e;
+            color: white !important;
+            border-color: #e53e3e;
+        }
+
+        /* Animasiya */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>📝 Yeni Tapşırıq Əlavə Et</h2>
+    <h2>📝 DevTask Manager</h2>
     <form action="/add-task" method="POST">
-        <input type="text" name="taskTitle" placeholder="Tapşırıq adı..." required>
+        <input type="text" name="taskTitle" placeholder="Yeni tapşırıq yazın..." required>
         <button type="submit">Əlavə Et</button>
     </form>
     <ul id="task-list"></ul>
 </div>
+
 <script src="script.js"></script>
 </body>
 </html>
