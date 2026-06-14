@@ -6,9 +6,9 @@ async function getTasks() {
     const tasks = await response.json();
 
     const ul = document.getElementById("task-list");
-    ul.innerHTML = ""; // İçini əvvəlcə təmizləyirik
+    ul.innerHTML = ""; 
 
-    // script.js faylındakı tasks.forEach hissəsini belə yeniləyirik:
+
     tasks.forEach(task => {
       ul.innerHTML += `
         <li>

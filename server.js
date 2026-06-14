@@ -53,21 +53,27 @@ app.get("/api/tasks", async (req, res) => {
     console.error(error);
   }
 });
+
 app.delete('/api/tasks', async (req, res) => {
     try {
         const { taskId } = req.body;
-        console.log("Frontend-dən gələn ID:", taskId); // Terminalda bunu yoxla!
+        console.log("Frontend-dən gələn ID:", taskId); 
 
-        const fileData = await fs.readFile(filePath, 'utf8');
+        // 1. Düzgün fayl yolunu və düzgün fsPromise obyektini işlədirik:
+        const fullPath = path.join(__dirname, "data", "tasks.json");
+        
+        const fileData = await fsPromise.readFile(fullPath, 'utf8');
         let tasks = JSON.parse(fileData);
 
-        // Həm string, həm də number ehtimalına qarşı tip toqquşmasının qarşısını alırıq:
+        // 2. ID-yə görə filter edirik
         tasks = tasks.filter(task => String(task.id) !== String(taskId));
 
-        await fs.writeFile(filePath, JSON.stringify(tasks, null, 2));
+        // 3. Yenə düzgün dəyişənlərlə fayla yazırıq
+        await fsPromise.writeFile(fullPath, JSON.stringify(tasks, null, 2));
+        
         res.status(200).json({ message: "Uğurla silindi!" });
     } catch (error) {
-        console.error("DƏQİQ BACKEND XƏTASI:", error); // VS Code terminalına dərhal bax!
+        console.error("DƏQİQ BACKEND XƏTASI:", error); 
         res.status(500).json({ error: error.message });
     }
 });
